@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.bg-vault {
+    --tw-bg-opacity: 1;
+    background-color: rgb(244 247 249 / var(--tw-bg-opacity));
+}
+
 body{
-    @apply bg-gray-100;
+    @apply bg-vault;
 }
