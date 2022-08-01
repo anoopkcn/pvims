@@ -55,28 +55,28 @@ export const columns = [
         cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
         header: 'DFH',
     }),
-    columnHelper.accessor('Eg_fund', {
-        cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
-        header: 'Eg_fund',
-    }),
-    columnHelper.accessor('Eg_direct', {
-        cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
-        header: 'Eg_direct',
-    }),
-    columnHelper.accessor('fund', {
-        cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
-        header: 'Fund',
-    }),
-    columnHelper.accessor('hEg_dir', {
-        cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
-        header: 'hEg_dir',
-    }),
-    columnHelper.accessor('SOC', {
-        cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
-        header: 'SOC',
-    }),
-    columnHelper.accessor('dir_SOC', {
-        cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
-        header: 'dir_SOC',
-    }),
+    // columnHelper.accessor('Eg_fund', {
+    //     cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
+    //     header: 'Eg_fund',
+    // }),
+    // columnHelper.accessor('Eg_direct', {
+    //     cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
+    //     header: 'Eg_direct',
+    // }),
+    // columnHelper.accessor('fund', {
+    //     cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
+    //     header: 'Fund',
+    // }),
+    // columnHelper.accessor('hEg_dir', {
+    //     cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
+    //     header: 'hEg_dir',
+    // }),
+    // columnHelper.accessor('SOC', {
+    //     cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
+    //     header: 'SOC',
+    // }),
+    // columnHelper.accessor('dir_SOC', {
+    //     cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
+    //     header: 'dir_SOC',
+    // }),
 ]
