@@ -26,7 +26,7 @@ function Filter({
     const columnFilterValue = column.getFilterValue()
 
     return typeof firstValue === 'number' ? (
-        <div className="grid grid-rows-2 grid-flow-col gap-2">
+        <div className="space-x-2">
             <input
                 type="number"
                 value={(columnFilterValue as [number, number])?.[0] ?? ''}
@@ -37,7 +37,7 @@ function Filter({
                     ])
                 }
                 placeholder={`Min`}
-                className="w-24 p-1"
+                className="w-16 p-1  text-xs text-center placeholder-gray-400"
             />
             <input
                 type="number"
@@ -49,7 +49,7 @@ function Filter({
                     ])
                 }
                 placeholder={`Max`}
-                className="w-24 p-1"
+                className="w-16 p-1  text-xs text-center placeholder-gray-400"
             />
         </div>
     ) : (
@@ -58,7 +58,7 @@ function Filter({
             value={(columnFilterValue ?? '') as string}
             onChange={e => column.setFilterValue(e.target.value)}
             placeholder={`Search`}
-            className="w-32 h-14 p-2"
+            className="w-32 p-1 text-xs text-center placeholder-gray-400"
         />
     )
 }
@@ -93,7 +93,7 @@ export const BasicTable = () => {
                                             header.getContext()
                                         )}
                                     {header.column.getCanFilter() ? (
-                                        <div>
+                                        <div className="py-2">
                                             <Filter column={header.column} table={table} />
                                         </div>
                                     ) : null}
