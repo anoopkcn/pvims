@@ -4,7 +4,8 @@ import { resolve } from 'path';
 import { z } from 'zod';
 
 const metadata_url = `https://api.github.com/repos/anoopkcn/pvimsdb/contents/metadata.json`
-const headers = { 'Accept': 'application/vnd.github.raw' }
+const about_url = `https://api.github.com/repos/anoopkcn/pvimsdb/contents/pvims_about.md`
+const headers = { 'Accept': 'application/vnd.github.raw+json' }
 
 export const appRouter = trpc
   .router()
@@ -13,8 +14,15 @@ export const appRouter = trpc
       const response = await fetch(metadata_url, { headers })
       const json = response.json()
       return json
-    }
-  });
+    },
+  })
+  .query("get-mat-about", {
+    async resolve({}){
+      const response = await fetch(about_url, { headers })
+      const about = response.text()
+      return about
+    },
+  })
 
 
 // export type definition of API
