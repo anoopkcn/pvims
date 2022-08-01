@@ -5,7 +5,7 @@ import {
     useReactTable,
 } from '@tanstack/react-table'
 import { number } from 'zod';
-// import reactStringReplace from 'react-string-replace';
+import reactStringReplace from 'react-string-replace';
 
 
 const columnHelper = createColumnHelper<Material>()
@@ -25,9 +25,9 @@ type Material = {
     dir_SOC: number
 }
 
-// const  MakeMatName = (material: string) => {
-//     return reactStringReplace(material, /(\d+)/g, (match, i) => (<sub>{match}</sub>));
-// }
+const  MakeMatName = (material: string) => {
+    return reactStringReplace(material, /(\d+)/g, (match, i) => (<sub key={i}>{match}</sub>));
+}
 
 
 export const columns = [
@@ -36,7 +36,8 @@ export const columns = [
         header: 'ID',
     }),
     columnHelper.accessor('material', {
-        cell: info => info.getValue(),
+        cell: info => MakeMatName(info.getValue()),
+        // cell: info => info.getValue(),
         header: 'Material',
     }),
     columnHelper.accessor('natoms', {
@@ -53,7 +54,7 @@ export const columns = [
     }),
     columnHelper.accessor('dfh', {
         cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
-        header: 'DFH',
+        header: () => <span>DFH<sup>1</sup></span>,
     }),
     // columnHelper.accessor('Eg_fund', {
     //     cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',

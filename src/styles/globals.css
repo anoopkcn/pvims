@@ -11,6 +11,6 @@ body{
     @apply bg-vault;
 }
 
-sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
-sup { top: -0.3em; vertical-align: super;}
-sub { bottom: -0.25em; vertical-align: sub;}
+sub, sup { font-size: 80%; line-height: 0; vertical-align: baseline; position: static; }
+sup { top: -0.2em; vertical-align: super;}
+sub { bottom: -0.1em; vertical-align: sub;}

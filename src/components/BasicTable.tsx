@@ -37,7 +37,7 @@ function Filter({
                     ])
                 }
                 placeholder={`Min`}
-                className="w-16 p-1  text-xs text-center placeholder-gray-400"
+                className="w-16 p-1  text-xs text-center placeholder-slate-400"
             />
             <input
                 type="number"
@@ -49,7 +49,7 @@ function Filter({
                     ])
                 }
                 placeholder={`Max`}
-                className="w-16 p-1  text-xs text-center placeholder-gray-400"
+                className="w-16 p-1  text-xs text-center placeholder-slate-400"
             />
         </div>
     ) : (
@@ -58,7 +58,7 @@ function Filter({
             value={(columnFilterValue ?? '') as string}
             onChange={e => column.setFilterValue(e.target.value)}
             placeholder={`Search`}
-            className="w-32 p-1 text-xs text-center placeholder-gray-400"
+            className="w-32 p-1 text-xs text-center placeholder-slate-400"
         />
     )
 }
@@ -80,23 +80,23 @@ export const BasicTable = () => {
     return (
         <div>
             <table className="border w-full text-sm text-center">
-                <thead className="text-xs uppercase sticky top-0 ">
+                <thead className="text-xs uppercase sticky top-0">
                     {table.getHeaderGroups().map(headerGroup => (
-                        <tr key={headerGroup.id} className="bg-gray-300">
+                        <tr key={headerGroup.id} className="bg-slate-400 text-white">
                             {headerGroup.headers.map(header => (
                                 <th key={header.id} className="py-3 px-4">
                                     <div>
-                                    {header.isPlaceholder
-                                        ? null
-                                        : flexRender(
-                                            header.column.columnDef.header,
-                                            header.getContext()
-                                        )}
-                                    {header.column.getCanFilter() ? (
-                                        <div className="py-2">
-                                            <Filter column={header.column} table={table} />
-                                        </div>
-                                    ) : null}
+                                        {header.isPlaceholder
+                                            ? null
+                                            : flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext()
+                                            )}
+                                        {header.column.getCanFilter() ? (
+                                            <div className="py-2">
+                                                <Filter column={header.column} table={table} />
+                                            </div>
+                                        ) : null}
                                     </div>
                                 </th>
                             ))}
@@ -115,6 +115,14 @@ export const BasicTable = () => {
                     ))}
                 </tbody>
             </table>
+            <div className="text-base sticky bottom-0 bg-slate-300 p-2">
+                <div className="grid grid-cols-2 space-x-2">
+                    <div className='text-left'><sup>1</sup>Metadata Details</div>
+                    <div className='text-right'>
+                        <span className='font-bold'>{table.getRowModel().rows.length}</span> rows
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
