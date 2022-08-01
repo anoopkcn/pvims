@@ -1,19 +1,13 @@
 import type { NextPage } from 'next'
-import Head from "next/head";
 import { BasicTable } from '@/components/BasicTable';
+import { Header } from '@/components/Header';
 
 const Home: NextPage = () => {
   return (
     <div className='h-screen w-screen flex flex-col items-center'>
-      <Head>
-        <title>Solar Materials Vault</title>
-      </Head>
-      <div className="text-center pt-8"> Solar materials vault </div>
-      <div className='p-2' />
-        <div className="overflow-x-auto shadow-md" >
-          <BasicTable />
-        </div>
-      <div className='p-2' />
+        <Header />
+        <BasicTable />
+        <div className='p-5' />
     </div>
   )
 }

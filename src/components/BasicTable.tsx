@@ -11,6 +11,7 @@ import {
 
 import { columns } from '@/components/columns';
 import { trpc } from '@/utils/trpc';
+import Link from 'next/link';
 
 function Filter({
     column,
@@ -24,9 +25,15 @@ function Filter({
         .flatRows[0]?.getValue(column.id)
 
     const columnFilterValue = column.getFilterValue()
+    const numberClass = `w-16 p-1 text-center text-slate-900 bg-sky-100 
+    placeholder:font-light placeholder:italic placeholder-slate-400 
+    focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2`
+    const textClass = `w-32 p-1 text-center text-slate-900  bg-sky-100 
+    placeholder:font-light placeholder:italic placeholder:text-slate-400 
+    focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2`
 
     return typeof firstValue === 'number' ? (
-        <div className="space-x-2">
+        <div className="space-x-1 space-y-1">
             <input
                 type="number"
                 value={(columnFilterValue as [number, number])?.[0] ?? ''}
@@ -37,9 +44,7 @@ function Filter({
                     ])
                 }
                 placeholder={`Min`}
-                className="w-16 p-1 text-center text-slate-900 
-                placeholder:font-light placeholder:italic placeholder-slate-400
-                focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2"
+                className={numberClass}
             />
             <input
                 type="number"
@@ -51,9 +56,7 @@ function Filter({
                     ])
                 }
                 placeholder={`Max`}
-                className="w-16 p-1 text-center text-slate-900 
-                placeholder:font-light placeholder:italic placeholder-slate-400
-                focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2"
+                className={numberClass}
             />
         </div>
     ) : (
@@ -62,9 +65,7 @@ function Filter({
             value={(columnFilterValue ?? '') as string}
             onChange={e => column.setFilterValue(e.target.value)}
             placeholder={`Search`}
-            className="w-32 p-1 text-center text-slate-900 
-            placeholder:font-light placeholder:italic placeholder:text-slate-400 
-            focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2"
+            className={textClass}
         />
     )
 }
@@ -83,7 +84,8 @@ export const BasicTable = () => {
         return null;
     }
     return (
-        <div>
+        <div className="overflow-x-auto shadow-md w-9/12" >
+            <div>
             <table className="border-collapse border border-slate-400 w-full text-sm text-center">
                 <thead className="text-xs uppercase sticky top-0">
                     {table.getHeaderGroups().map(headerGroup => (
@@ -121,14 +123,14 @@ export const BasicTable = () => {
                 </tbody>
                 <tfoot className="border border-slate-400 text-base text-white sticky bottom-0 bg-sky-800 p-2">
                     <tr>
-                        <td><span className='text-left'><sup>1</sup>Details</span></td>
+                        <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td>
                         {/* console.log(table.getHeaderGroups().rows.length); */}
                         {[...Array(columns.length - 2)].map((e, i) => <td key={i}></td>)}
-                        <td> <span className='font-bold'>{table.getRowModel().rows.length}</span> rows </td>
+                        <td> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
                     </tr>
                 </tfoot>
             </table>
-
+            </div>
         </div>
     )
 }
