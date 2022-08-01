@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Header = () => {
     return (
-        <div className="mx-auto w-9/12">
+        <div className="mx-auto w-4/6">
             <Head>
                 <title>Solar Materials Vault</title>
             </Head>

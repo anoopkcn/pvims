@@ -27,10 +27,10 @@ function Filter({
     const columnFilterValue = column.getFilterValue()
     const numberClass = `w-16 p-1 text-center text-slate-900 bg-sky-100 
     placeholder:font-light placeholder:italic placeholder-slate-400 
-    focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2`
+    focus:outline-none focus:border-slate-200 focus:ring-slate-200 focus:ring-2`
     const textClass = `w-32 p-1 text-center text-slate-900  bg-sky-100 
     placeholder:font-light placeholder:italic placeholder:text-slate-400 
-    focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2`
+    focus:outline-none focus:border-slate-200 focus:ring-slate-200 focus:ring-2`
 
     return typeof firstValue === 'number' ? (
         <div className="space-x-1 space-y-1">
@@ -84,7 +84,7 @@ export const BasicTable = () => {
         return null;
     }
     return (
-        <div className="overflow-x-auto shadow-md w-9/12" >
+        <div className="overflow-x-auto shadow-md w-4/6" >
             <div>
             <table className="border-collapse border border-slate-400 w-full text-sm text-center">
                 <thead className="text-xs uppercase sticky top-0">
