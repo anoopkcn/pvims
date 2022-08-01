@@ -37,8 +37,9 @@ function Filter({
                     ])
                 }
                 placeholder={`Min`}
-                className="w-16 p-1 font-light text-center text-slate-600 placeholder:italic placeholder-slate-400
-                focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
+                className="w-16 p-1 text-center text-slate-900 
+                placeholder:font-light placeholder:italic placeholder-slate-400
+                focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2"
             />
             <input
                 type="number"
@@ -50,8 +51,9 @@ function Filter({
                     ])
                 }
                 placeholder={`Max`}
-                className="w-16 p-1 font-light text-center text-slate-600 placeholder:italic placeholder-slate-400
-                focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
+                className="w-16 p-1 text-center text-slate-900 
+                placeholder:font-light placeholder:italic placeholder-slate-400
+                focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2"
             />
         </div>
     ) : (
@@ -60,8 +62,9 @@ function Filter({
             value={(columnFilterValue ?? '') as string}
             onChange={e => column.setFilterValue(e.target.value)}
             placeholder={`Search`}
-            className="w-32 p-1 font-light text-center text-slate-600 placeholder:italic placeholder:text-slate-400 
-            focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
+            className="w-32 p-1 text-center text-slate-900 
+            placeholder:font-light placeholder:italic placeholder:text-slate-400 
+            focus:outline-none focus:border-sky-600 focus:ring-sky-600 focus:ring-2"
         />
     )
 }
@@ -84,7 +87,7 @@ export const BasicTable = () => {
             <table className="border-collapse border border-slate-400 w-full text-sm text-center">
                 <thead className="text-xs uppercase sticky top-0">
                     {table.getHeaderGroups().map(headerGroup => (
-                        <tr key={headerGroup.id} className="bg-slate-400 text-white">
+                        <tr key={headerGroup.id} className="bg-sky-800 text-white">
                             {headerGroup.headers.map(header => (
                                 <th key={header.id} className="py-3 px-4">
                                     <div>
@@ -107,7 +110,7 @@ export const BasicTable = () => {
                 </thead>
                 <tbody>
                     {table.getRowModel().rows.map(row => (
-                        <tr key={row.id} className="border">
+                        <tr key={row.id} className="border hover:bg-slate-200">
                             {row.getVisibleCells().map(cell => (
                                 <td key={cell.id} className="py-3 px-4">
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -116,7 +119,7 @@ export const BasicTable = () => {
                         </tr>
                     ))}
                 </tbody>
-                <tfoot className="border border-slate-400 text-base sticky bottom-0 bg-slate-300 p-2">
+                <tfoot className="border border-slate-400 text-base text-white sticky bottom-0 bg-sky-800 p-2">
                     <tr>
                         <td><span className='text-left'><sup>1</sup>Details</span></td>
                         {/* console.log(table.getHeaderGroups().rows.length); */}
