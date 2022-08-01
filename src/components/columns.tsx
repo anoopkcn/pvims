@@ -50,7 +50,7 @@ export const columns = [
     }),
     columnHelper.accessor('bandgap', {
         cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',
-        header: 'Bandgap',
+        header: () => <span>Bandgap<sup>1</sup></span>,
     }),
     columnHelper.accessor('dfh', {
         cell: info => info.getValue() ? info.getValue().toFixed(4) : '-',

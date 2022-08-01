@@ -73,7 +73,6 @@ export const BasicTable = () => {
         getFilteredRowModel: getFilteredRowModel(),
     })
 
-    // console.log(data?.[0]);
     if (isLoading) {
         return null;
     }
@@ -114,15 +113,16 @@ export const BasicTable = () => {
                         </tr>
                     ))}
                 </tbody>
+                <tfoot className="border border-slate-400 text-base sticky bottom-0 bg-slate-300 p-2">
+                    <tr>
+                        <td><span className='text-left'><sup>1</sup>Details</span></td>
+                        {/* console.log(table.getHeaderGroups().rows.length); */}
+                        {[...Array(columns.length-2)].map((e, i) => <td key={i}></td>)}
+                        <td> <span className='font-bold'>{table.getRowModel().rows.length}</span> rows </td>
+                    </tr>
+                </tfoot>
             </table>
-            <div className="border border-slate-400 text-base sticky bottom-0 bg-slate-300 p-2">
-                <div className="grid grid-cols-2 space-x-2">
-                    <div className='text-left'><sup>1</sup>Metadata Details</div>
-                    <div className='text-right'>
-                        <span className='font-bold'>{table.getRowModel().rows.length}</span> rows
-                    </div>
-                </div>
-            </div>
+
         </div>
     )
 }
