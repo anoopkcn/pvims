@@ -1,18 +1,58 @@
+import { trpc } from '@/utils/trpc';
 import type { NextPage } from 'next'
 import Head from "next/head";
+import { number } from 'zod';
+import reactStringReplace from 'react-string-replace';
+
+type Material = {
+  id: number
+  material: string
+  natoms: number
+  space_group: string
+  bandgap: number
+  dfh: number
+  Eg_fund: number
+  Eg_direct: number
+  fund: number
+  hEg_dir: number
+  SOC: number
+  dir_SOC: number
+}
 
 const Home: NextPage = () => {
+  const { data, error, isLoading } = trpc.useQuery(['get-mat-metadata']);
+  // console.log(data?.[0]);
+  if (isLoading) {
+    return null;
+  }
+
+  function makeMatName(material: string) {
+    return reactStringReplace(material, /(\d+)/g, (match,i)=>(<sub key={i}>{match}</sub>))
+  }
+
   return (
-    <div className="h-screen w-screen flex flex-col justify-center relative">
+    <div>
       <Head>
         <title>Solar materials vault</title>
       </Head>
-      <div className='text-2xl text-center'> Solar materials vault </div>
-      <div className='p-2'/> 
-      <div className="border rounded p-8 flex flex-col max-w-2xl mx-auto">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa ullam autem illum? Veritatis odit animi est dolorum illo, vero tenetur quam temporibus dignissimos culpa aut ratione consequatur? Non, reprehenderit quasi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit doloremque quidem sint nobis quia, maxime maiores ab architecto non rerum atque inventore illo? Maiores sunt iste voluptates, adipisci sit saepe.
+      <div> Solar materials vault </div>
+      <div className='p-2' />
+      <div className="" >
+        {data.map((item: Material) => {
+          return (
+            <div key={item.id}>
+              {/* id: {item.id}  */}
+              material: {makeMatName(item.material)}
+              natoms: {item.natoms}
+              bandgap: {item.bandgap.toFixed(4)} eV 
+              SOC: {item.SOC ? item.SOC.toFixed(4) : '-'}
+              {/* hell<sub>world</sub> */}
+              <hr />
+            </div>
+          );
+        })}
       </div>
-      <div className='p-2'/> 
+      <div className='p-2' />
     </div>
   )
 }
