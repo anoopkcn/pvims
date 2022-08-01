@@ -79,7 +79,7 @@ export const BasicTable = () => {
     }
     return (
         <div>
-            <table className="border w-full text-sm text-center">
+            <table className="border-collapse border border-slate-400 w-full text-sm text-center">
                 <thead className="text-xs uppercase sticky top-0">
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id} className="bg-slate-400 text-white">
@@ -105,7 +105,7 @@ export const BasicTable = () => {
                 </thead>
                 <tbody>
                     {table.getRowModel().rows.map(row => (
-                        <tr key={row.id} className="border-b">
+                        <tr key={row.id} className="border">
                             {row.getVisibleCells().map(cell => (
                                 <td key={cell.id} className="py-3 px-4">
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -115,7 +115,7 @@ export const BasicTable = () => {
                     ))}
                 </tbody>
             </table>
-            <div className="text-base sticky bottom-0 bg-slate-300 p-2">
+            <div className="border border-slate-400 text-base sticky bottom-0 bg-slate-300 p-2">
                 <div className="grid grid-cols-2 space-x-2">
                     <div className='text-left'><sup>1</sup>Metadata Details</div>
                     <div className='text-right'>

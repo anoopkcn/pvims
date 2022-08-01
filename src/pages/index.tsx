@@ -10,7 +10,7 @@ const Home: NextPage = () => {
       </Head>
       <div className="text-center pt-8"> Solar materials vault </div>
       <div className='p-2' />
-        <div className="overflow-x-auto shadow-md sm:rounded-lg" >
+        <div className="overflow-x-auto shadow-md" >
           <BasicTable />
         </div>
       <div className='p-2' />
