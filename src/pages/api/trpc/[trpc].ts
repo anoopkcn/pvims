@@ -3,7 +3,7 @@ import * as trpcNext from '@trpc/server/adapters/next';
 import { resolve } from 'path';
 import { z } from 'zod';
 
-const metadata_url = `https://api.github.com/repos/anoopkcn/solar-mat-vault-data/contents/metadata.json`
+const metadata_url = `https://api.github.com/repos/anoopkcn/pvimsdb/contents/metadata.json`
 const headers = { 'Accept': 'application/vnd.github.raw' }
 
 export const appRouter = trpc
