@@ -37,7 +37,8 @@ function Filter({
                     ])
                 }
                 placeholder={`Min`}
-                className="w-16 p-1 text-center text-slate-600 placeholder-slate-400"
+                className="w-16 p-1 font-light text-center text-slate-600 placeholder:italic placeholder-slate-400
+                focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
             />
             <input
                 type="number"
@@ -49,7 +50,8 @@ function Filter({
                     ])
                 }
                 placeholder={`Max`}
-                className="w-16 p-1 text-center text-slate-600 placeholder-slate-400"
+                className="w-16 p-1 font-light text-center text-slate-600 placeholder:italic placeholder-slate-400
+                focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
             />
         </div>
     ) : (
@@ -58,7 +60,8 @@ function Filter({
             value={(columnFilterValue ?? '') as string}
             onChange={e => column.setFilterValue(e.target.value)}
             placeholder={`Search`}
-            className="w-32 p-1 text-center text-slate-600 placeholder-slate-400"
+            className="w-32 p-1 font-light text-center text-slate-600 placeholder:italic placeholder:text-slate-400 
+            focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
         />
     )
 }
@@ -117,7 +120,7 @@ export const BasicTable = () => {
                     <tr>
                         <td><span className='text-left'><sup>1</sup>Details</span></td>
                         {/* console.log(table.getHeaderGroups().rows.length); */}
-                        {[...Array(columns.length-2)].map((e, i) => <td key={i}></td>)}
+                        {[...Array(columns.length - 2)].map((e, i) => <td key={i}></td>)}
                         <td> <span className='font-bold'>{table.getRowModel().rows.length}</span> rows </td>
                     </tr>
                 </tfoot>
