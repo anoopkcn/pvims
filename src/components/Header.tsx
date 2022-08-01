@@ -5,7 +5,7 @@ export const Header = () => {
     return (
         <div className="mx-auto w-4/6">
             <Head>
-                <title>Solar Materials Vault</title>
+                <title>PViMS</title>
             </Head>
             <header className="py-6">
                 <div className="container mx-auto md:flex md:items-center md:justify-between">
@@ -14,6 +14,7 @@ export const Header = () => {
                     <h2 className="text-slate-500">PhotoVoltaic inspired Materials Search</h2>
                 </div>
                 <ul className="md:flex md:items-center list-reset text-lg text-sky-800">
+                    <li className="md:pl-4"><Link href='/metadata'>Metadata</Link></li>
                     <li className="md:pl-4"><Link href='/about'>About</Link></li>
                     <li className="md:pl-4">Contact</li>
                 </ul>
