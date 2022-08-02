@@ -2,12 +2,10 @@ import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
 import { resolve } from 'path';
 import { z } from 'zod';
-import { Octokit, App } from "octokit";
 
 const metadata_url = `https://api.github.com/repos/anoopkcn/pvimsdb/contents/metadata.json`
 const headers = { 'Accept': 'application/vnd.github.raw+json' }
 
-const octokit = new Octokit({auth: process.env.GITHUB_TOKEN}); 
 
 export const appRouter = trpc
   .router()
