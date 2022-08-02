@@ -6,9 +6,13 @@ const Home: NextPage = () => {
     <div className='h-screen w-screen flex flex-col items-center'>
       <Header />
       <div className='container mx-auto w-4/6'>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident a ratione nam quod eius, ducimus quae officia ipsam numquam inventore reiciendis quisquam unde quaerat harum consequatur voluptas nostrum incidunt placeat?
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, laboriosam ratione. Eaque vero minus quibusdam doloribus numquam temporibus nisi soluta mollitia cupiditate est, maxime eos quas odio vel molestias id?
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos saepe impedit porro vero dolorem officiis animi. Modi veritatis esse ratione quibusdam suscipit maiores, itaque quisquam nesciunt autem neque, voluptas harum!
+        <h1 className='text-2xl text-sky-800 font-bold'>
+          Databse for photovoltaic materials and their properties
+        </h1>
+        <h2 className='text-xl text-slate-500'>
+          Fair usage of data
+        </h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero earum voluptate rerum, quam, quis iusto autem nam dolorum a natus fuga laudantium eaque molestias impedit ratione delectus, eos minus esse.</p>
       </div>
     </div>
   )

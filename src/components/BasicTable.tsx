@@ -85,38 +85,37 @@ export const BasicTable = (props: { data: never[]; loading: boolean; }) => {
     });
 
     const dataLoaded = !isLoading && data.length > 0;
-    // if (isLoading) {
-    //     return null;
-    // }
+
     // const dataLoaded = false;
     return (
-        <div className="overflow-x-auto shadow-md w-4/6" >
+        <div className="overflow-x-auto w-4/6" >
             <div>
-                {dataLoaded && (
-                    <table className="border-collapse border border-slate-400 w-full text-sm text-center">
-                        <thead className="text-xs uppercase sticky top-0">
-                            {table.getHeaderGroups().map(headerGroup => (
-                                <tr key={headerGroup.id} className="bg-sky-800 text-white">
-                                    {headerGroup.headers.map(header => (
-                                        <th key={header.id} className="py-3 px-4">
-                                            <div>
-                                                {header.isPlaceholder
-                                                    ? null
-                                                    : flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                                {header.column.getCanFilter() ? (
-                                                    <div className="py-2">
-                                                        <Filter column={header.column} table={table} />
-                                                    </div>
-                                                ) : null}
-                                            </div>
-                                        </th>
-                                    ))}
-                                </tr>
-                            ))}
-                        </thead>
+
+                <table className="border-collapse border border-slate-400 w-full text-sm text-center">
+                    <thead className="text-xs uppercase sticky top-0">
+                        {table.getHeaderGroups().map(headerGroup => (
+                            <tr key={headerGroup.id} className="bg-sky-800 text-white">
+                                {headerGroup.headers.map(header => (
+                                    <th key={header.id} className="py-3 px-4">
+                                        <div>
+                                            {header.isPlaceholder
+                                                ? null
+                                                : flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext()
+                                                )}
+                                            {header.column.getCanFilter() ? (
+                                                <div className="py-2">
+                                                    <Filter column={header.column} table={table} />
+                                                </div>
+                                            ) : null}
+                                        </div>
+                                    </th>
+                                ))}
+                            </tr>
+                        ))}
+                    </thead>
+                    {dataLoaded && (
                         <tbody>
                             {table.getRowModel().rows.map(row => (
                                 <tr key={row.id} className="border hover:bg-slate-200">
@@ -128,22 +127,28 @@ export const BasicTable = (props: { data: never[]; loading: boolean; }) => {
                                 </tr>
                             ))}
                         </tbody>
-                        <tfoot className="border border-slate-400 text-base text-white sticky bottom-0 bg-sky-800 p-2">
+                    )}
+                    {!dataLoaded && (
+                        <tbody>
                             <tr>
-                                <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td>
-                                {[...Array(columns.length - 2)].map((e, i) => <td key={i}></td>)}
-                                <td> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
+                                <td colSpan={columns.length}>
+                                    <div className='h-80 flex flex-col items-center'>
+                                        <div className='m-auto'>
+                                            <Image src="/puff.svg" alt="loading" width="64" height="64" />
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
-                        </tfoot>
-                    </table>
-                )}
-                {!dataLoaded && (
-                    <div className='h-80 flex flex-col items-center'>
-                        <div className='m-auto'>
-                            <Image src="/puff.svg" alt="loading" width="64" height="64" />
-                        </div>
-                    </div>
-                )}
+                        </tbody>
+                    )}
+                    <tfoot className="border border-slate-400 text-base text-white sticky bottom-0 bg-sky-800 p-2">
+                        <tr>
+                            <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td>
+                            {[...Array(columns.length - 2)].map((e, i) => <td key={i}></td>)}
+                            <td> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     )
