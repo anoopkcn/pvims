@@ -16,7 +16,7 @@ export const Header = () => {
                 <ul className="md:flex md:items-center list-reset text-lg text-sky-800">
                     <li className="md:pl-4"><Link href='/metadata'>Metadata</Link></li>
                     <li className="md:pl-4"><Link href='/about'>About</Link></li>
-                    <li className="md:pl-4">Contact</li>
+                    <li className="md:pl-4"><Link href='/contact'>Contact</Link></li>
                 </ul>
                 </div>
             </header>

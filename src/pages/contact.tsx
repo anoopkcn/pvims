@@ -1,16 +1,16 @@
 import type { NextPage } from 'next'
 import { Header } from '@/components/Header';
 
-const About: NextPage = () => {
+const Contact: NextPage = () => {
     return (
         <div className='h-screen w-screen flex flex-col items-center'>
             <Header />
             <div className='container mx-auto w-4/6 text-lg' >
                 <h1 className='text-2xl text-sky-800 font-bold pb-5'>
-                    About the databse
+                    Contact
                 </h1>
                 <h2 className='text-xl text-slate-500 pb-3'>
-                    data description
+                    Anoop K. Chandran
                 </h2>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero earum voluptate rerum, quam, quis iusto autem nam dolorum a natus fuga laudantium eaque molestias impedit ratione delectus, eos minus esse.
@@ -25,4 +25,4 @@ const About: NextPage = () => {
     )
 }
 
-export default About
+export default Contact
