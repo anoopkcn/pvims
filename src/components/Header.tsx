@@ -1,12 +1,8 @@
-import Head from "next/head";
 import Link from "next/link";
 
 export const Header = () => {
     return (
         <div className="mx-auto w-4/6">
-            <Head>
-                <title>PViMS</title>
-            </Head>
             <header className="py-6">
                 <div className="container mx-auto md:flex md:items-center md:justify-between">
                 <div>
