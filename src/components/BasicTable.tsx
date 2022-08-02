@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-table'
 
 import { columns } from '@/components/columns';
-import { trpc } from '@/utils/trpc';
+
 import Link from 'next/link';
 
 function Filter({
@@ -71,8 +71,11 @@ function Filter({
 }
 
 
-export const BasicTable = () => {
-    const { data, error, isLoading } = trpc.useQuery(['get-mat-metadata']);
+export const BasicTable = (props: { data: never[]; loading: boolean; }) => {
+
+    const data = props.data ?? [];
+    const isLoading = props.loading ?? false;
+    
     const table = useReactTable({
         data,
         columns,

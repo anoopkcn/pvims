@@ -24,7 +24,7 @@ export default withTRPC<AppRouter>({
       /**
        * @link https://react-query-v3.tanstack.com/reference/QueryClient
        */
-      // queryClientConfig: { defaultOptions: { queries: { refetchOnMount: false, refetchOnWindowFocus: false, } } },
+      queryClientConfig: { defaultOptions: { queries: { refetchOnMount: false, refetchOnWindowFocus: false, } } },
     };
   },
   /**
