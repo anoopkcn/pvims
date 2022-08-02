@@ -78,7 +78,7 @@ export const BasicTable = () => {
         columns,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
-    })
+    });
 
     if (isLoading) {
         return null;
@@ -86,6 +86,7 @@ export const BasicTable = () => {
     return (
         <div className="overflow-x-auto shadow-md w-4/6" >
             <div>
+            { data && (
             <table className="border-collapse border border-slate-400 w-full text-sm text-center">
                 <thead className="text-xs uppercase sticky top-0">
                     {table.getHeaderGroups().map(headerGroup => (
@@ -130,6 +131,7 @@ export const BasicTable = () => {
                     </tr>
                 </tfoot>
             </table>
+            )}
             </div>
         </div>
     )

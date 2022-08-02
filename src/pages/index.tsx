@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import { BasicTable } from '@/components/BasicTable';
 import { Header } from '@/components/Header';
 
 const Home: NextPage = () => {
