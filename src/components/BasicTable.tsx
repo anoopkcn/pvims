@@ -125,13 +125,13 @@ export const BasicTable = () => {
                 <tfoot className="border border-slate-400 text-base text-white sticky bottom-0 bg-sky-800 p-2">
                     <tr>
                         <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td>
-                        {/* console.log(table.getHeaderGroups().rows.length); */}
                         {[...Array(columns.length - 2)].map((e, i) => <td key={i}></td>)}
                         <td> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
                     </tr>
                 </tfoot>
             </table>
             )}
+            {!data && <span>loading...</span>}
             </div>
         </div>
     )
