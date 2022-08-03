@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export const Header = () => {
   return (
-    <div className="mx-auto w-4/6">
+    <div className="mx-auto w-4/6 py-4">
       <header className="py-6">
         <div className="flex flex-row items-center justify-between">
 
