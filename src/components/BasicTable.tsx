@@ -15,7 +15,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 import { MetaAPIResponse } from '@/backend/router';
 
-import {LoadingPuff} from '@/components/LoadingPuff';
+import { LoadingPuff } from '@/components/LoadingPuff';
 
 
 function Filter({
@@ -76,7 +76,7 @@ function Filter({
 }
 
 
-export const BasicTable: React.FC<{ data : MetaAPIResponse[] | undefined; isLoading: boolean }> = (props) => {
+export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoading: boolean }> = (props) => {
 
   const data = props.data ?? [];
   const isLoading = props.isLoading ?? false;
@@ -92,64 +92,61 @@ export const BasicTable: React.FC<{ data : MetaAPIResponse[] | undefined; isLoad
 
   // const dataLoaded = false;
   return (
-    <div className="overflow-x-auto w-4/6" >
-      <div>
-
-        <table className="border-collapse border border-slate-400 w-full text-sm text-center">
-          <thead className="text-xs uppercase sticky top-0">
-            {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id} className="bg-sky-800 text-white">
-                {headerGroup.headers.map(header => (
-                  <th key={header.id} className="py-3 px-4">
-                    <div>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      {header.column.getCanFilter() ? (
-                        <div className="py-2">
-                          <Filter column={header.column} table={table} />
-                        </div>
-                      ) : null}
-                    </div>
-                  </th>
+    <div className="overflow-x-auto" >
+      <table className="border-collapse border border-slate-400 w-full text-sm text-center">
+        <thead className="text-xs uppercase sticky top-0">
+          {table.getHeaderGroups().map(headerGroup => (
+            <tr key={headerGroup.id} className="bg-sky-800 text-white">
+              {headerGroup.headers.map(header => (
+                <th key={header.id} className="py-3 px-4">
+                  <div>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    {header.column.getCanFilter() ? (
+                      <div className="py-2">
+                        <Filter column={header.column} table={table} />
+                      </div>
+                    ) : null}
+                  </div>
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        {dataLoaded && (
+          <tbody>
+            {table.getRowModel().rows.map(row => (
+              <tr key={row.id} className="border hover:bg-slate-200">
+                {row.getVisibleCells().map(cell => (
+                  <td key={cell.id} className="py-3 px-4">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
                 ))}
               </tr>
             ))}
-          </thead>
-          {dataLoaded && (
-            <tbody>
-              {table.getRowModel().rows.map(row => (
-                <tr key={row.id} className="border hover:bg-slate-200">
-                  {row.getVisibleCells().map(cell => (
-                    <td key={cell.id} className="py-3 px-4">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          )}
-          {!dataLoaded && (
-            <tbody>
-              <tr>
-                <td colSpan={columns.length}>
-                  <LoadingPuff />
-                </td>
-              </tr>
-            </tbody>
-          )}
-          <tfoot className="border border-slate-400 text-base text-white sticky bottom-0 bg-sky-800 p-2">
+          </tbody>
+        )}
+        {!dataLoaded && (
+          <tbody>
             <tr>
-              <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td>
-              {[...Array(columns.length - 2)].map((e, i) => <td key={i}></td>)}
-              <td> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
+              <td colSpan={columns.length}>
+                <LoadingPuff />
+              </td>
             </tr>
-          </tfoot>
-        </table>
-      </div>
+          </tbody>
+        )}
+        <tfoot className="border border-slate-400 text-base text-white sticky bottom-0 bg-sky-800 p-2">
+          <tr>
+            <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td>
+            {[...Array(columns.length - 2)].map((e, i) => <td key={i}></td>)}
+            <td> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
   )
 }

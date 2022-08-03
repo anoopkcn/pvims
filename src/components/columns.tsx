@@ -1,19 +1,8 @@
 import { createColumnHelper } from '@tanstack/react-table'
-import reactStringReplace from 'react-string-replace';
 import { MetaAPIResponse } from '@/backend/router';
-
+import { fixPrecision, MakeMatName } from '@/utils/helpers';
 
 const columnHelper = createColumnHelper<MetaAPIResponse>()
-
-
-const MakeMatName = (material: string) => {
-  return reactStringReplace(material, /(\d+)/g, (match, i) => (<sub key={i}>{match}</sub>));
-}
-const fixPrecision = (num: number | null | undefined) => {
-  if (num == null) return '-';
-  return num.toFixed(4);
-}
-
 
 export const columns = [
   columnHelper.accessor('id', {

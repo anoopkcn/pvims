@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from 'next/image'
 
-export const Header = () => {
+export const Header = (props: any) => {
   return (
-    <div className="mx-auto w-4/6 py-4">
+    <div className='container mx-auto w-4/6 text-lg h-screen flex flex-col pb-10'>
+    <div className="mx-auto w-full py-4">
       <header className="py-6">
         <div className="flex flex-row items-center justify-between">
 
@@ -37,6 +38,8 @@ export const Header = () => {
         </div>
       </header>
       <div className='p-2' />
+    </div>
+    {props.children}
     </div>
   )
 }

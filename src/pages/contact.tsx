@@ -1,11 +1,8 @@
 import type { NextPage } from 'next'
-import { Header } from '@/components/Header';
 
 const Contact: NextPage = () => {
   return (
-    <div className='h-screen w-screen flex flex-col items-center'>
-      <Header />
-      <div className='container mx-auto w-4/6 text-lg' >
+      <div>
         <h1 className='text-2xl text-sky-800 font-bold pb-5'>
           Contact
         </h1>
@@ -19,8 +16,6 @@ const Contact: NextPage = () => {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, dolorum natus sunt commodi tempora totam fugit excepturi beatae magnam a quia tempore impedit consequatur praesentium consequuntur fuga, harum quidem est!
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure expedita minima accusantium nisi ipsa, est repudiandae nihil quae sequi, autem reiciendis
         </p>
-      </div>
-      <div className="p-5" />
     </div>
   )
 }

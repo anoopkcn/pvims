@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import { Header } from '@/components/Header';
 import { trpc } from '@/utils/trpc';
 import { MetaAPIResponse } from '@/backend/router';
 import React from 'react';
@@ -21,9 +20,7 @@ const Home: NextPage = () => {
 
 
   return (
-    <div className='h-screen w-screen flex flex-col items-center'>
-      <Header />
-      <div className='container mx-auto w-4/6 text-lg' >
+      <div>
         <h1 className='text-2xl text-sky-800 font-bold pb-5'>
           Databse for photovoltaic materials and their properties
         </h1>
@@ -40,14 +37,9 @@ const Home: NextPage = () => {
         {dataLoaded && (
           <div className='flex flex-col items-center pb-5'>
           <ScatterChart
-            width={800}
-            height={400}
-            margin={{
-              top: 20,
-              right: 20,
-              bottom: 20,
-              left: 20,
-            }}
+            width={600}
+            height={600}
+            margin={{ top:10, right:10, bottom:10, left:10, }}
           >
             <XAxis type="number" dataKey="fund" name="x" unit="" />
             <YAxis type="number" dataKey="bandgap" name="y" unit="" hide={true} />
@@ -61,8 +53,6 @@ const Home: NextPage = () => {
         )}
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic molestias labore vitae? Accusantium cupiditate autem quisquam maiores inventore, commodi vel iure blanditiis placeat nostrum expedita esse quo amet ea rerum!
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum vel facilis repudiandae qui recusandae corrupti similique obcaecati doloribus fugiat ut autem iure porro doloremque, quibusdam facere quam est quia officia.
-      </div>
-      <div className="p-10" />
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { withTRPC } from '@trpc/next';
 import { AppType } from 'next/dist/shared/lib/utils';
 import { AppRouter } from '@/backend/router';
 import Head from "next/head";
+import { Header } from '@/components/Header';
 
 
 // function getBaseUrl() {
@@ -55,7 +56,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link rel="shortcut icon" href="/favicon/favicon.ico" />
       </Head>
-    <Component {...pageProps} />
+      <Header>
+        <Component {...pageProps} />
+      </Header>
     </div>
   )
 };
