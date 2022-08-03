@@ -24,7 +24,7 @@ export const columns = [
   columnHelper.accessor('bandgap', {
     // if value is not null or undefined, then  get the value
     cell: info => fixPrecision(info.getValue()),
-    header: () => <span>Bandgap<sup>1</sup></span>,
+    header: 'bandgap',
   }),
   // columnHelper.accessor('Eg_fund', {
   //   cell: info => fixPrecision(info.getValue()),
@@ -32,7 +32,7 @@ export const columns = [
   // }),
   columnHelper.accessor('dfh', {
     cell: info => fixPrecision(info.getValue()),
-    header: () => <span>DFH<sup>1</sup></span>,
+    header: 'stability',
   }),
 
   // columnHelper.accessor('Eg_direct', {
