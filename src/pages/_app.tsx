@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 
 import { withTRPC } from '@trpc/next';
 import { AppType } from 'next/dist/shared/lib/utils';
-import { AppRouter } from '@/pages/api/trpc/[trpc]';
+import { AppRouter } from '@/backend/router';
 import Head from "next/head";
 
 
@@ -69,5 +69,5 @@ export default withTRPC<AppRouter>({
       queryClientConfig: { defaultOptions: { queries: { refetchOnMount: false, refetchOnWindowFocus: false, } } },
     };
   },
-  ssr: false,
+  ssr: true,
 })(MyApp);

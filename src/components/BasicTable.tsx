@@ -13,6 +13,8 @@ import { columns } from '@/components/columns';
 
 import Link from 'next/link';
 import Image from 'next/image'
+import { MetaAPIResponse } from '@/backend/router';
+
 
 function Filter({
   column,
@@ -72,10 +74,10 @@ function Filter({
 }
 
 
-export const BasicTable = (props: { data: never[]; loading: boolean; }) => {
+export const BasicTable: React.FC<{ data : MetaAPIResponse[] | undefined; isLoading: boolean }> = (props) => {
 
   const data = props.data ?? [];
-  const isLoading = props.loading ?? false;
+  const isLoading = props.isLoading ?? false;
 
   const table = useReactTable({
     data,

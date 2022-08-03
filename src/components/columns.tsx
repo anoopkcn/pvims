@@ -1,29 +1,10 @@
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
-import { number } from 'zod';
+import { createColumnHelper } from '@tanstack/react-table'
 import reactStringReplace from 'react-string-replace';
+import { MetaAPIResponse } from '@/backend/router';
 
 
-const columnHelper = createColumnHelper<Material>()
+const columnHelper = createColumnHelper<MetaAPIResponse>()
 
-type Material = {
-  id: number
-  material: string
-  natoms: number
-  space_group: string
-  bandgap: number
-  dfh: number
-  Eg_fund: number
-  Eg_direct: number
-  fund: number
-  hEg_dir: number
-  SOC: number
-  dir_SOC: number
-}
 
 const MakeMatName = (material: string) => {
   return reactStringReplace(material, /(\d+)/g, (match, i) => (<sub key={i}>{match}</sub>));
@@ -37,7 +18,6 @@ export const columns = [
   }),
   columnHelper.accessor('material', {
     cell: info => MakeMatName(info.getValue()),
-    // cell: info => info.getValue(),
     header: 'Material',
   }),
   columnHelper.accessor('natoms', {
