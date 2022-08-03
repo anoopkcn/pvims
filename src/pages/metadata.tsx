@@ -7,9 +7,9 @@ const Metadata: NextPage = () => {
   const { data, error, isLoading } = trpc.useQuery(['get-mat-metadata']);
   return (
     <div className='h-screen w-screen flex flex-col items-center'>
-        <Header />
-        <BasicTable data={data} loading={isLoading} />
-        <div className='p-5' />
+      <Header />
+      <BasicTable data={data} loading={isLoading} />
+      <div className='p-5' />
     </div>
   )
 }
