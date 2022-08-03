@@ -92,11 +92,11 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
 
   // const dataLoaded = false;
   return (
-    <div className="overflow-x-auto" >
-      <table className="border-collapse border border-slate-400 w-full text-sm text-center">
+    <div className="overflow-x-auto border border-slate-300 max-h-[75vh]" >
+      <table className="w-full text-sm text-center">
         <thead className="text-xs uppercase sticky top-0">
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id} className="bg-sky-800 text-white">
+            <tr key={headerGroup.id} className="border bg-sky-800 text-white">
               {headerGroup.headers.map(header => (
                 <th key={header.id} className="py-3 px-4">
                   <div>
@@ -120,7 +120,7 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
         {dataLoaded && (
           <tbody>
             {table.getRowModel().rows.map(row => (
-              <tr key={row.id} className="border hover:bg-slate-200">
+              <tr key={row.id} className="hover:bg-slate-200">
                 {row.getVisibleCells().map(cell => (
                   <td key={cell.id} className="py-3 px-4">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -139,7 +139,7 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
             </tr>
           </tbody>
         )}
-        <tfoot className="border border-slate-400 text-base text-white sticky bottom-0 bg-sky-800 p-2">
+        <tfoot className="border text-base text-white sticky bottom-0 bg-sky-800">
           <tr>
             <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td>
             {[...Array(columns.length - 2)].map((e, i) => <td key={i}></td>)}
