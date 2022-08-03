@@ -15,6 +15,8 @@ import Link from 'next/link';
 import Image from 'next/image'
 import { MetaAPIResponse } from '@/backend/router';
 
+import {LoadingPuff} from '@/components/LoadingPuff';
+
 
 function Filter({
   column,
@@ -134,16 +136,7 @@ export const BasicTable: React.FC<{ data : MetaAPIResponse[] | undefined; isLoad
             <tbody>
               <tr>
                 <td colSpan={columns.length}>
-                  <div className='h-80 flex flex-col items-center'>
-                    <div className='m-auto'>
-                      <Image src="/puff.svg" alt="loading" width="64" height="64" />
-                      <div className="p-2">
-                        <p>Loading data from Server. <span className='font-bold'>This should be fast</span></p>
-                        <p>If it takes more than <span className='font-bold'>5 seconds</span> please reload the page</p>
-                        <p>If it is still loading contact the developer at <Link href="/contact"><a className='text-slate-400'>Contact</a></Link> </p>
-                      </div>
-                    </div>
-                  </div>
+                  <LoadingPuff />
                 </td>
               </tr>
             </tbody>
