@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export const Layout = (props: any) => {
   return (
-    <div className='container h-screen w-4/6 flex flex-col mx-auto text-lg'>
+    <div className='container h-screen w-4/6 flex flex-col mx-auto font-sans text-lg'>
     <div className="mx-auto w-full py-4">
       <header className="py-6">
         <div className="flex flex-row items-center justify-between">

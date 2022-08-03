@@ -30,10 +30,10 @@ function Filter({
     .flatRows[0]?.getValue(column.id)
 
   const columnFilterValue = column.getFilterValue()
-  const numberClass = `w-16 p-1 rounded text-center text-slate-900
+  const numberClass = `w-16 p-1 rounded text-center font-sans text-slate-900
     placeholder:font-light placeholder-slate-400 
     focus:outline-none focus:border-slate-200 focus:ring-slate-200 focus:ring-2`
-  const textClass = `w-32 p-1 rounded text-center text-slate-900 
+  const textClass = `w-32 p-1 rounded text-center font-sans text-slate-900 
     placeholder:font-light placeholder:text-slate-400 
     focus:outline-none focus:border-slate-200 focus:ring-slate-200 focus:ring-2`
 
@@ -96,7 +96,7 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
       <table className="relative w-full text-sm text-center">
         <thead className="sticky top-0 text-xs uppercase">
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id} className="border bg-slate-500 text-white">
+            <tr key={headerGroup.id} className="border bg-cyan-800 text-white ">
               {headerGroup.headers.map(header => (
                 <th key={header.id} className="py-3 px-4">
                   <div>
@@ -142,8 +142,8 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
         <tfoot className="sticky bottom-0 border text-base">
           <tr>
             {/* <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td> */}
+            <td className='text-white bg-cyan-800/80 rounded-md'> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
             {[...Array(columns.length - 1)].map((e, i) => <td key={i}></td>)}
-            <td className='text-white bg-slate-400 rounded-md'> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
           </tr>
         </tfoot>
       </table>

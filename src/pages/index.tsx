@@ -1,23 +1,22 @@
 import type { NextPage } from 'next'
 import { trpc } from '@/utils/trpc';
-import { MetaAPIResponse } from '@/backend/router';
 import React from 'react';
 
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { LoadingPuff } from '@/components/LoadingPuff';
-
-type DataPick = {
-  bandgap: MetaAPIResponse['bandgap'],
-  dfh: MetaAPIResponse['dfh'],
-}
+import { makeDataFrom } from '@/utils/helpers';
 
 const Home: NextPage = () => {
   const { data, error, isLoading } = trpc.useQuery(['get-mat-metadata']);
   const data_t = data ?? [];
 
-  const dataLoaded = !isLoading && data_t.length > 0;
+  const dataLoaded = !isLoading && data_t.length > 0; 
   // const dataLoaded = false;
 
+  const series = makeDataFrom(data_t.length, false);
+  series.forEach((s, i) => {
+    s.radius = Math.floor(Number(data_t[i].dfh)*1000);
+  });
 
   return (
       <div>
@@ -36,16 +35,19 @@ const Home: NextPage = () => {
         </p>
         {dataLoaded && (
           <div className='flex flex-col items-center pb-5'>
+          <ResponsiveContainer width="100%" height={400}>
           <ScatterChart
-            width={600}
-            height={600}
+            width={800}
+            height={400}
             margin={{ top:10, right:10, bottom:10, left:10, }}
           >
-            <XAxis type="number" dataKey="fund" name="x" unit="" />
-            <YAxis type="number" dataKey="bandgap" name="y" unit="" hide={true} />
+            <XAxis type="number" dataKey="primary" name="x" unit=""  hide={true}/>
+            <YAxis type="number" dataKey="secondary" name="y" unit="" hide={true} />
+            <ZAxis type="number" dataKey="radius" range={[0,400]} scale="pow"/>
             <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter name="A school" data={data_t} fill="#8884d8" />
+            <Scatter name="stability" data={series} fill="#0e7490" opacity={0.7} />
           </ScatterChart>
+          </ResponsiveContainer>
           </div>
         )}
         {!dataLoaded && (

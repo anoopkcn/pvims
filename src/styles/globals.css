@@ -8,20 +8,9 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
-}
-
-
-.bg-vault {
-    --tw-bg-opacity: 1;
-    background-color: rgb(244 247 249 / var(--tw-bg-opacity));
-}
-
-body{
-    @apply bg-vault;
 }
 
 sub, sup { font-size: 80%; line-height: 0; vertical-align: baseline; position: static; }
