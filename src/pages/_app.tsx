@@ -7,11 +7,18 @@ import { AppRouter } from '@/pages/api/trpc/[trpc]';
 import Head from "next/head";
 
 
-function getBaseUrl() {
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
-  return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
-}
+// function getBaseUrl() {
+//   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
+//   return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
+// }
 
+export const getBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "production")
+    return "https://pvims.vercel.app";
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV === "preview")
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+  return "http://localhost:3000";
+};
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   const description =
