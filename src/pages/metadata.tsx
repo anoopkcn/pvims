@@ -9,7 +9,7 @@ const Metadata: NextPage = () => {
   return (
     <div className='h-screen w-screen flex flex-col items-center'>
       <Header />
-        <BasicTable data={data} isLoading={isLoading} />
+      <BasicTable data={data} isLoading={isLoading} />
       <div className='p-5' />
     </div>
   )
