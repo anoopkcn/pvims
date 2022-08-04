@@ -13,7 +13,6 @@ const metaValidator = z.object({
   density: z.number().nullable().optional(),
   dfh: z.number().nullable().optional(),
   dir_SOC: z.number().nullable().optional(),
-
   dirgap_wSOC: z.number().nullable().optional(),
   dirgap_woSOC: z.number().nullable().optional(),
   eff_mass: z.number().nullable().optional(),

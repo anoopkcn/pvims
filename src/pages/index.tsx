@@ -58,10 +58,17 @@ const Home: NextPage = () => {
     label,
   }: TooltipProps<ValueType, NameType>) => {
     if (active) {
+      const activeData = payload?.[0].payload;
       return (
-        <div>
-          <p className="label">{`${payload?.[0].dataKey}`}</p>
-          <p className="desc">test</p>
+        <div className='bg-emerald-700/90 p-5 rounded-md text-white'>
+          <p>{`Material = ${activeData.material}`}</p>
+          <p>{`Space Group = ${activeData.space_group}`}</p>
+          <p>{`Number of Atoms = ${activeData.natoms}`}</p>
+          <p>{`Bond Length = ${Number(activeData.anion_cation_distance).toFixed(2)}`}</p>
+          <p>{`Bandgap = ${Number(activeData.bandgap).toFixed(2)}`}</p>
+          <p>{`Stability = ${Number(activeData.dfh).toFixed(2)}`}</p>
+          <p>{`dPrime = ${Number(activeData.deformation_potential).toFixed(2)}`}</p>
+          <p>{`Volume = ${Number(activeData.equilibrium_volume).toFixed(2)}`}</p>
         </div>
       );
     }
@@ -79,19 +86,7 @@ const Home: NextPage = () => {
       </h2>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero earum voluptate rerum, quam, quis iusto autem nam dolorum a natus fuga laudantium eaque molestias impedit ratione delectus,
-      </p>
-      <div className='flex flex-col items-center py-10'>
-        <FunnelChart width={600} height={300}>
-          <Funnel
-            dataKey="value"
-            data={FUNNEL_DATA}
-            isAnimationActive
-          >
-            <LabelList position="inside" fill="#fff" stroke="none" dataKey="name" />
-          </Funnel>
-        </FunnelChart>
-      </div>
-      <p>
+
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, dolorum natus sunt commodi tempora totam fugit excepturi beatae magnam a quia tempore impedit consequatur praesentium consequuntur fuga, harum quidem est!
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure expedita minima accusantium nisi ipsa, est repudiandae nihil quae sequi, autem reiciendis
       </p>
@@ -108,14 +103,14 @@ const Home: NextPage = () => {
                 dataKey="dfh"
                 name="x" unit=""
                 domain={getDomain(plotdata, 'dfh')}
-                tickFormatter={(value) => value.toFixed(2)}
+                tickFormatter={(value: number) => value.toFixed(2)}
                 label={{ value: 'stability', position: 'insideTopRight', offset: -15 }}
               />
               <YAxis type="number"
                 dataKey="bandgap"
                 name="y" unit=" eV"
                 domain={getDomain(plotdata, 'bandgap')}
-                tickFormatter={(value) => value.toFixed(1)}
+                tickFormatter={(value: number) => value.toFixed(1)}
                 label={{ value: 'bandgap', position: 'insideTopLeft', offset: 60, angle: -90 }}
               />
               <Legend verticalAlign='top' />
