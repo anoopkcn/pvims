@@ -1,60 +1,106 @@
 import type { NextPage } from 'next'
 import { trpc } from '@/utils/trpc';
-import React from 'react';
+import { TooltipProps } from 'recharts';
+import {
+  ValueType,
+  NameType,
+} from 'recharts/src/component/DefaultTooltipContent';
+
 
 import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { LoadingPuff } from '@/components/LoadingPuff';
-import { makeDataFrom } from '@/utils/helpers';
+import { makeDataFrom, makeDataSubset } from '@/utils/helpers';
+import { MetaAPIResponse } from '@/backend/router';
+
+
+type PlotDataType = MetaAPIResponse & {
+  primary: number | null;
+  secondary: number | null;
+  radius?: number | null;
+  rad?: number | null;
+}
+
 
 const Home: NextPage = () => {
   const { data, error, isLoading } = trpc.useQuery(['get-mat-metadata']);
+
   const data_t = data ?? [];
 
-  const dataLoaded = !isLoading && data_t.length > 0; 
+  const dataLoaded = !isLoading && data_t.length > 0;
   // const dataLoaded = false;
 
-  const series = makeDataFrom(data_t.length, false);
-  series.forEach((s, i) => {
-    s.radius = Math.floor(Number(data_t[i].dfh)*1000);
-  });
+  const dataSubset = makeDataSubset(data_t, [0.5, 3], 'bandgap')
+  // console.log(dataSubset);
+
+  const randomSeries = makeDataFrom(dataSubset.length, false);
+  const plotdata: PlotDataType[] = [
+    ...dataSubset.map((item, i) => ({
+      ...item,
+      ...randomSeries[i],
+      'rad': Math.floor(Number(item.dfh) * 1000)
+    })),
+  ];
+
+  // console.log(plotdata)
+
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: TooltipProps<ValueType, NameType>) => {
+    if (active) {
+      return (
+        <div>
+          <p className="label">{`${payload?.[0].dataKey}`}</p>
+          <p className="desc">test</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   return (
-      <div>
-        <h1 className='text-2xl text-sky-800 font-bold pb-5'>
-          Databse for photovoltaic materials and their properties
-        </h1>
-        <h2 className='text-xl text-slate-500 pb-3'>
-          Fair usage of data
-        </h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero earum voluptate rerum, quam, quis iusto autem nam dolorum a natus fuga laudantium eaque molestias impedit ratione delectus, eos minus esse.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, dolorum natus sunt commodi tempora totam fugit excepturi beatae magnam a quia tempore impedit consequatur praesentium consequuntur fuga, harum quidem est!
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure expedita minima accusantium nisi ipsa, est repudiandae nihil quae sequi, autem reiciendis
-        </p>
-        {dataLoaded && (
-          <div className='flex flex-col items-center pb-5'>
+    <div>
+      <h1 className='text-2xl text-sky-800 font-bold pb-5'>
+        Database for photovoltaic materials and their properties
+      </h1>
+      <h2 className='text-xl text-slate-500 pb-3'>
+        Fair usage of data
+      </h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero earum voluptate rerum, quam, quis iusto autem nam dolorum a natus fuga laudantium eaque molestias impedit ratione delectus, eos minus esse.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, dolorum natus sunt commodi tempora totam fugit excepturi beatae magnam a quia tempore impedit consequatur praesentium consequuntur fuga, harum quidem est!
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure expedita minima accusantium nisi ipsa, est repudiandae nihil quae sequi, autem reiciendis
+      </p>
+      {dataLoaded && (
+        <div className='flex flex-col items-center p-10'>
           <ResponsiveContainer width="100%" height={400}>
-          <ScatterChart
-            width={800}
-            height={400}
-            margin={{ top:10, right:10, bottom:10, left:10, }}
-          >
-            <XAxis type="number" dataKey="primary" name="x" unit=""  hide={true}/>
-            <YAxis type="number" dataKey="secondary" name="y" unit="" hide={true} />
-            <ZAxis type="number" dataKey="radius" range={[0,400]} scale="pow"/>
-            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-            <Scatter name="stability" data={series} fill="#0e7490" opacity={0.7} />
-          </ScatterChart>
+            <ScatterChart
+              width={800}
+              height={400}
+              margin={{ top: 10, right: 10, bottom: 10, left: 10, }}
+            >
+              <XAxis type="number" dataKey="primary" name="x" unit="" hide={true} />
+              <YAxis type="number" dataKey="bandgap" name="y" unit="" hide={true} domain={
+                [plotdata.reduce((min, b) => Math.min(min, Number(b?.bandgap)), Number(plotdata[0]?.bandgap)), // min
+                plotdata.reduce((max, b) => Math.max(max, Number(b?.bandgap)), Number(plotdata[0]?.bandgap))]  // max
+              }
+              />
+              <ZAxis type="number" dataKey="rad" range={[0, 400]} scale="pow" />
+              <Scatter name="stability" data={plotdata} fill="#0e7490" opacity={0.7} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} content={<CustomTooltip />} />
+            </ScatterChart>
           </ResponsiveContainer>
-          </div>
-        )}
-        {!dataLoaded && (
-          <LoadingPuff />
-        )}
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic molestias labore vitae? Accusantium cupiditate autem quisquam maiores inventore, commodi vel iure blanditiis placeat nostrum expedita esse quo amet ea rerum!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum vel facilis repudiandae qui recusandae corrupti similique obcaecati doloribus fugiat ut autem iure porro doloremque, quibusdam facere quam est quia officia.
+        </div>
+      )}
+      {!dataLoaded && (
+        <LoadingPuff />
+      )}
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic molestias labore vitae? Accusantium cupiditate autem quisquam maiores inventore, commodi vel iure blanditiis placeat nostrum expedita esse quo amet ea rerum!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum vel facilis repudiandae qui recusandae corrupti similique obcaecati doloribus fugiat ut autem iure porro doloremque, quibusdam facere quam est quia officia.
     </div>
   )
 }

@@ -92,13 +92,13 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
 
   // const dataLoaded = false;
   return (
-    <div className="overflow-x-auto border rounded-lg border-slate-600 border-opacity-20 max-h-[75vh]" >
-      <table className="relative w-full text-sm text-center">
+    <div className="overflow-x-auto border rounded-sm border-slate-600 border-opacity-20 max-h-[75vh]" >
+      <table className="isolate w-full text-sm text-center border-separate border-spacing-0">
         <thead className="sticky top-0 text-xs uppercase">
           {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id} className="border bg-cyan-800 text-white ">
+            <tr key={headerGroup.id} className="bg-cyan-800 text-white">
               {headerGroup.headers.map(header => (
-                <th key={header.id} className="py-3 px-4">
+                <th key={header.id} className="py-3 px-4 z-10 border-b border-gray-300" scope='col'>
                   <div>
                     {header.isPlaceholder
                       ? null
@@ -142,8 +142,8 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
         <tfoot className="sticky bottom-0 border text-base">
           <tr>
             {/* <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td> */}
-            <td className='text-white bg-cyan-800/80 rounded-md'> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
             {[...Array(columns.length - 1)].map((e, i) => <td key={i}></td>)}
+            <td className='text-white bg-cyan-800/80 rounded-sm'> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
           </tr>
         </tfoot>
       </table>
