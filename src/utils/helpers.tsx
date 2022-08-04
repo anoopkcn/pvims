@@ -1,5 +1,5 @@
-import { MetaAPIResponse } from '@/backend/router';
 import reactStringReplace from 'react-string-replace';
+import { MetaAPIResponse, PlotDataType } from './types';
 
 
 export const MakeMatName = (material: string) => {
@@ -47,3 +47,8 @@ export const makeDataSubset = (data: MetaAPIResponse[] ,range: [number, number],
   if (!(Number(item?.[key as keyof typeof item]))) return
   return Number(item?.[key as keyof typeof item]) <= range[1] && Number(item?.[key as keyof typeof item]) >= range[0];
 });
+
+export const  getDomain = (data: PlotDataType[], key: string) =>{
+  return [data.reduce((min, b) => Math.min(min, Number(b?.[key as keyof typeof b])), Number(data[0]?.[key as keyof typeof data[0]])),
+  data.reduce((max, b) => Math.max(max, Number(b?.[key as keyof typeof b])), Number(data[0]?.[key as keyof typeof data[0]]))];
+}

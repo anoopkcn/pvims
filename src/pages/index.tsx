@@ -6,20 +6,14 @@ import {
   NameType,
 } from 'recharts/src/component/DefaultTooltipContent';
 
+import _ from 'lodash';
+
 
 import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { LoadingPuff } from '@/components/LoadingPuff';
-import { makeDataFrom, makeDataSubset } from '@/utils/helpers';
-import { MetaAPIResponse } from '@/backend/router';
+import { getDomain, makeDataFrom, makeDataSubset } from '@/utils/helpers';
 import { METADATA_VERSION } from '@/utils/constants';
-
-
-type PlotDataType = MetaAPIResponse & {
-  primary: number | null;
-  secondary: number | null;
-  radius?: number | null;
-  rad?: number | null;
-}
+import { PlotDataType } from '@/utils/types';
 
 
 const Home: NextPage = () => {
@@ -42,7 +36,19 @@ const Home: NextPage = () => {
     })),
   ];
 
-  // console.log(plotdata)
+  // matches property if deformation_potential is grater than zero
+  const pdprime = _.filter(plotdata, (item) => {
+    if (item.deformation_potential !== null && Number(item.deformation_potential) >0) {
+      return item;
+    }
+  }
+  );
+  const ndprime = _.filter(plotdata, (item) => {
+    if (item.deformation_potential !== null && Number(item.deformation_potential) <=0) {
+      return item;
+    }
+  }
+  );
 
   const CustomTooltip = ({
     active,
@@ -84,14 +90,14 @@ const Home: NextPage = () => {
               height={400}
               margin={{ top: 10, right: 10, bottom: 10, left: 10, }}
             >
-              <XAxis type="number" dataKey="primary" name="x" unit="" hide={true} />
+              <XAxis type="number" dataKey="density" name="x" unit="" hide={true} domain={getDomain(plotdata, 'density') } />
               <YAxis type="number" dataKey="bandgap" name="y" unit="" hide={true} domain={
-                [plotdata.reduce((min, b) => Math.min(min, Number(b?.bandgap)), Number(plotdata[0]?.bandgap)), // min
-                plotdata.reduce((max, b) => Math.max(max, Number(b?.bandgap)), Number(plotdata[0]?.bandgap))]  // max
+                getDomain(plotdata, 'bandgap') 
               }
               />
               <ZAxis type="number" dataKey="rad" range={[0, 400]} scale="pow" />
-              <Scatter name="stability" data={plotdata} fill="#0e7490" opacity={0.7} />
+              <Scatter name="stability" data={pdprime} fill="#ea580c" opacity={0.7} />
+              <Scatter name="stability" data={ndprime} fill="#0e7490" opacity={0.7} />
               <Tooltip cursor={{ strokeDasharray: '3 3' }} content={<CustomTooltip />} />
             </ScatterChart>
           </ResponsiveContainer>
@@ -107,3 +113,4 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
