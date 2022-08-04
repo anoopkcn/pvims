@@ -11,6 +11,7 @@ import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Res
 import { LoadingPuff } from '@/components/LoadingPuff';
 import { makeDataFrom, makeDataSubset } from '@/utils/helpers';
 import { MetaAPIResponse } from '@/backend/router';
+import { METADATA_VERSION } from '@/utils/constants';
 
 
 type PlotDataType = MetaAPIResponse & {
@@ -22,7 +23,7 @@ type PlotDataType = MetaAPIResponse & {
 
 
 const Home: NextPage = () => {
-  const { data, error, isLoading } = trpc.useQuery(['get-mat-metadata']);
+  const { data, error, isLoading } = trpc.useQuery(['get-mat-metadata', {version: METADATA_VERSION}]);
 
   const data_t = data ?? [];
 
@@ -76,10 +77,10 @@ const Home: NextPage = () => {
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure expedita minima accusantium nisi ipsa, est repudiandae nihil quae sequi, autem reiciendis
       </p>
       {dataLoaded && (
-        <div className='flex flex-col items-center p-10'>
+        <div className='flex flex-col items-center p-20'>
           <ResponsiveContainer width="100%" height={400}>
             <ScatterChart
-              width={800}
+              width={600}
               height={400}
               margin={{ top: 10, right: 10, bottom: 10, left: 10, }}
             >
