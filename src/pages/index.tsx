@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { trpc } from '@/utils/trpc';
-import { TooltipProps } from 'recharts';
+import { Funnel, FunnelChart, LabelList, Legend, ReferenceArea, TooltipProps } from 'recharts';
 import {
   ValueType,
   NameType,
@@ -12,8 +12,10 @@ import _ from 'lodash';
 import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { LoadingPuff } from '@/components/LoadingPuff';
 import { getDomain, makeDataFrom, makeDataSubset } from '@/utils/helpers';
-import { METADATA_VERSION } from '@/utils/constants';
+import { FUNNEL_DATA, METADATA_VERSION } from '@/utils/constants';
 import { PlotDataType } from '@/utils/types';
+
+
 
 
 const Home: NextPage = () => {
@@ -76,26 +78,52 @@ const Home: NextPage = () => {
         Fair usage of data
       </h2>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero earum voluptate rerum, quam, quis iusto autem nam dolorum a natus fuga laudantium eaque molestias impedit ratione delectus, eos minus esse.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero earum voluptate rerum, quam, quis iusto autem nam dolorum a natus fuga laudantium eaque molestias impedit ratione delectus,
       </p>
+      <div className='flex flex-col items-center py-10'>
+        <FunnelChart width={600} height={300}>
+          <Funnel
+            dataKey="value"
+            data={FUNNEL_DATA}
+            isAnimationActive
+          >
+            <LabelList position="inside" fill="#fff" stroke="none" dataKey="name" />
+          </Funnel>
+        </FunnelChart>
+      </div>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, dolorum natus sunt commodi tempora totam fugit excepturi beatae magnam a quia tempore impedit consequatur praesentium consequuntur fuga, harum quidem est!
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure expedita minima accusantium nisi ipsa, est repudiandae nihil quae sequi, autem reiciendis
       </p>
       {dataLoaded && (
-        <div className='flex flex-col items-center p-20'>
+        <div className='flex flex-col items-center py-10'>
           <ResponsiveContainer width="100%" height={400}>
             <ScatterChart
               width={600}
               height={400}
-              margin={{ top: 10, right: 10, bottom: 10, left: 10, }}
+              margin={{ top: 10, right: 20, bottom: 10, left: 20, }}
             >
-              <XAxis type="number" dataKey="density" name="x" unit="" hide={true} domain={getDomain(plotdata, 'density')} />
-              <YAxis type="number" dataKey="bandgap" name="y" unit="" hide={true} domain={getDomain(plotdata, 'bandgap')} />
+              <CartesianGrid strokeDasharray="4" />
+              <XAxis type="number"
+                dataKey="dfh"
+                name="x" unit=""
+                domain={getDomain(plotdata, 'dfh')}
+                tickFormatter={(value) => value.toFixed(2)}
+                label={{ value: 'stability', position: 'insideTopRight', offset: -15 }}
+              />
+              <YAxis type="number"
+                dataKey="bandgap"
+                name="y" unit=" eV"
+                domain={getDomain(plotdata, 'bandgap')}
+                tickFormatter={(value) => value.toFixed(1)}
+                label={{ value: 'bandgap', position: 'insideTopLeft', offset: 60, angle: -90 }}
+              />
+              <Legend verticalAlign='top' />
               <ZAxis type="number" dataKey="rad" range={[0, 400]} scale="pow" />
-              <Scatter name="stability" data={pdprime} fill="#ea580c" opacity={0.7} />
-              <Scatter name="stability" data={ndprime} fill="#0e7490" opacity={0.7} />
+              <Scatter name="+d'" data={pdprime} fill="#ea580c" opacity={0.7} />
+              <Scatter name="-d'" data={ndprime} fill="#0e7490" opacity={0.7} />
               <Tooltip cursor={{ strokeDasharray: '3 3' }} content={<CustomTooltip />} />
+              {/* <ReferenceArea x1={0.048} x2={0.10} y1={1.2} y2={2.99} stroke="#be123c" strokeOpacity={0.3} label="Ideal" /> */}
             </ScatterChart>
           </ResponsiveContainer>
         </div>
