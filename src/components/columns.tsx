@@ -1,5 +1,5 @@
 import { createColumnHelper } from '@tanstack/react-table'
-import { MetaAPIResponse } from '@/backend/router';
+import { MetaAPIResponse } from '@/utils/types';
 import { fixPrecision, MakeMatName } from '@/utils/helpers';
 
 const columnHelper = createColumnHelper<MetaAPIResponse>()

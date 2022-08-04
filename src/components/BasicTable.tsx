@@ -13,7 +13,7 @@ import { columns } from '@/components/columns';
 
 import Link from 'next/link';
 import Image from 'next/image'
-import { MetaAPIResponse } from '@/backend/router';
+import { MetaAPIResponse } from '@/utils/types';
 
 import { LoadingPuff } from '@/components/LoadingPuff';
 
