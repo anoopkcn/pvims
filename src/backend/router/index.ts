@@ -11,7 +11,7 @@ export const appRouter = trpc
     input: z.object({
       version: z.string(),
     }),
-    async resolve({input}) {
+    async resolve({ input }) {
       const response = await fetch(`${metadata_url}/metadata_v${input?.version}.json`, {
         "method": "GET",
         "headers": {
