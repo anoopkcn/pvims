@@ -10,7 +10,7 @@ export const fixPrecision = (num: number | null | undefined) => {
   return num.toFixed(4);
 }
 
-export const  makeDataFrom =(
+export const makeDataFrom = (
   datums: number,
   useR?: boolean
 ) => {
@@ -27,8 +27,8 @@ export const  makeDataFrom =(
 
     const y = Math.random() < nullChance ? null : min + Math.round(Math.random() * (max - min));
 
-    if (useR){
-      const r =  rMax - Math.floor( Math.log(Math.random() * (distribution ** rMax - rMin) + rMin) / Math.log(distribution) );
+    if (useR) {
+      const r = rMax - Math.floor(Math.log(Math.random() * (distribution ** rMax - rMin) + rMin) / Math.log(distribution));
       return {
         primary: x,
         secondary: y,
@@ -42,13 +42,13 @@ export const  makeDataFrom =(
   })
 }
 
-export const makeDataSubset = (data: MetaAPIResponse[] ,range: [number, number], key: string) => data.filter((item) => {
+export const makeDataSubset = (data: MetaAPIResponse[], range: [number, number], key: string) => data.filter((item) => {
   if (!(key in item)) return
   if (!(Number(item?.[key as keyof typeof item]))) return
   return Number(item?.[key as keyof typeof item]) <= range[1] && Number(item?.[key as keyof typeof item]) >= range[0];
 });
 
-export const  getDomain = (data: PlotDataType[], key: string) =>{
+export const getDomain = (data: PlotDataType[], key: string) => {
   return [data.reduce((min, b) => Math.min(min, Number(b?.[key as keyof typeof b])), Number(data[0]?.[key as keyof typeof data[0]])),
   data.reduce((max, b) => Math.max(max, Number(b?.[key as keyof typeof b])), Number(data[0]?.[key as keyof typeof data[0]]))];
 }

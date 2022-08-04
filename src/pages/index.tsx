@@ -17,7 +17,7 @@ import { PlotDataType } from '@/utils/types';
 
 
 const Home: NextPage = () => {
-  const { data, error, isLoading } = trpc.useQuery(['get-mat-metadata', {version: METADATA_VERSION}]);
+  const { data, error, isLoading } = trpc.useQuery(['get-mat-metadata', { version: METADATA_VERSION }]);
 
   const data_t = data ?? [];
 
@@ -38,13 +38,13 @@ const Home: NextPage = () => {
 
   // matches property if deformation_potential is grater than zero
   const pdprime = _.filter(plotdata, (item) => {
-    if (item.deformation_potential !== null && Number(item.deformation_potential) >0) {
+    if (item.deformation_potential !== null && Number(item.deformation_potential) > 0) {
       return item;
     }
   }
   );
   const ndprime = _.filter(plotdata, (item) => {
-    if (item.deformation_potential !== null && Number(item.deformation_potential) <=0) {
+    if (item.deformation_potential !== null && Number(item.deformation_potential) <= 0) {
       return item;
     }
   }
@@ -90,11 +90,8 @@ const Home: NextPage = () => {
               height={400}
               margin={{ top: 10, right: 10, bottom: 10, left: 10, }}
             >
-              <XAxis type="number" dataKey="density" name="x" unit="" hide={true} domain={getDomain(plotdata, 'density') } />
-              <YAxis type="number" dataKey="bandgap" name="y" unit="" hide={true} domain={
-                getDomain(plotdata, 'bandgap') 
-              }
-              />
+              <XAxis type="number" dataKey="density" name="x" unit="" hide={true} domain={getDomain(plotdata, 'density')} />
+              <YAxis type="number" dataKey="bandgap" name="y" unit="" hide={true} domain={getDomain(plotdata, 'bandgap')} />
               <ZAxis type="number" dataKey="rad" range={[0, 400]} scale="pow" />
               <Scatter name="stability" data={pdprime} fill="#ea580c" opacity={0.7} />
               <Scatter name="stability" data={ndprime} fill="#0e7490" opacity={0.7} />
