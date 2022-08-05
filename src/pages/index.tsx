@@ -34,7 +34,7 @@ const Home: NextPage = () => {
     ...dataSubset.map((item, i) => ({
       ...item,
       ...randomSeries[i],
-      'rad': Math.floor(Number(item.dfh) * 1000)
+      'rad': Math.floor(Number(item.natoms) * 1000)
     })),
   ];
 
@@ -60,7 +60,7 @@ const Home: NextPage = () => {
     if (active) {
       const activeData = payload?.[0].payload;
       return (
-        <div className='bg-emerald-700/90 p-5 rounded-md text-white'>
+        <div className='bg-emerald-700/90 border border-emerald-800 p-5 rounded-md text-white'>
           <p>{`Material = ${activeData.material}`}</p>
           <p>{`Space Group = ${activeData.space_group}`}</p>
           <p>{`Number of Atoms = ${activeData.natoms}`}</p>
@@ -113,11 +113,11 @@ const Home: NextPage = () => {
                 tickFormatter={(value: number) => value.toFixed(1)}
                 label={{ value: 'bandgap', position: 'insideTopLeft', offset: 60, angle: -90 }}
               />
-              <Legend verticalAlign='top' />
+              <Legend verticalAlign='bottom' />
               <ZAxis type="number" dataKey="rad" range={[0, 400]} scale="pow" />
               <Scatter name="+d'" data={pdprime} fill="#ea580c" opacity={0.7} />
               <Scatter name="-d'" data={ndprime} fill="#0e7490" opacity={0.7} />
-              <Tooltip cursor={{ strokeDasharray: '3 3' }} content={<CustomTooltip />} />
+              <Tooltip cursor={{ strokeDasharray: '3 3' , stroke: 'green', strokeWidth: 1 }} content={<CustomTooltip />} />
               {/* <ReferenceArea x1={0.048} x2={0.10} y1={1.2} y2={2.99} stroke="#be123c" strokeOpacity={0.3} label="Ideal" /> */}
             </ScatterChart>
           </ResponsiveContainer>
