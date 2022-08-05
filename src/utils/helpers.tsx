@@ -1,4 +1,5 @@
 import reactStringReplace from 'react-string-replace';
+import { IS_DATA_LOADED } from './constants';
 import { MetaAPIResponse, PlotDataType } from './types';
 
 
@@ -51,4 +52,10 @@ export const makeDataSubset = (data: MetaAPIResponse[], range: [number, number],
 export const getDomain = (data: PlotDataType[], key: string) => {
   return [data.reduce((min, b) => Math.min(min, Number(b?.[key as keyof typeof b])), Number(data[0]?.[key as keyof typeof data[0]])),
   data.reduce((max, b) => Math.max(max, Number(b?.[key as keyof typeof b])), Number(data[0]?.[key as keyof typeof data[0]]))];
+}
+
+export const DataLoaded=(data: MetaAPIResponse[], isLoading: boolean) =>{
+  if (!IS_DATA_LOADED) return false;
+  const data_t = data ?? [];
+  return !isLoading && data_t.length > 0;
 }

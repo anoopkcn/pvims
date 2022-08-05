@@ -16,6 +16,7 @@ import Image from 'next/image'
 import { MetaAPIResponse } from '@/utils/types';
 
 import { LoadingPuff } from '@/components/LoadingPuff';
+import { DataLoaded } from '@/utils/helpers';
 
 
 function Filter({
@@ -88,7 +89,7 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  const dataLoaded = !isLoading && data.length > 0;
+  const dataLoaded = DataLoaded(data, isLoading);
 
   // const dataLoaded = false;
   return (
@@ -139,6 +140,7 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
             </tr>
           </tbody>
         )}
+        {dataLoaded && (
         <tfoot className="sticky bottom-0 border text-base">
           <tr>
             {/* <td><span className='text-left'><sup>1</sup><Link href="/about">Details</Link></span></td> */}
@@ -146,6 +148,7 @@ export const BasicTable: React.FC<{ data: MetaAPIResponse[] | undefined; isLoadi
             <td className='text-white bg-cyan-800/80 rounded-sm'> <span className='font-bold'>{table.getRowModel().rows.length}</span> entries </td>
           </tr>
         </tfoot>
+        )}
       </table>
     </div>
   )

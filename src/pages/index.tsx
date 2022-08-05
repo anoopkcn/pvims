@@ -11,8 +11,8 @@ import _ from 'lodash';
 
 import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { LoadingPuff } from '@/components/LoadingPuff';
-import { getDomain, makeDataFrom, makeDataSubset } from '@/utils/helpers';
-import { FUNNEL_DATA, METADATA_VERSION } from '@/utils/constants';
+import { DataLoaded, getDomain, makeDataFrom, makeDataSubset } from '@/utils/helpers';
+import { METADATA_VERSION } from '@/utils/constants';
 import { PlotDataType } from '@/utils/types';
 
 
@@ -23,11 +23,9 @@ const Home: NextPage = () => {
 
   const data_t = data ?? [];
 
-  const dataLoaded = !isLoading && data_t.length > 0;
-  // const dataLoaded = false;
+  const dataLoaded = DataLoaded(data_t, isLoading);
 
   const dataSubset = makeDataSubset(data_t, [0.5, 3], 'bandgap')
-  // console.log(dataSubset);
 
   const randomSeries = makeDataFrom(dataSubset.length, false);
   const plotdata: PlotDataType[] = [
@@ -91,7 +89,7 @@ const Home: NextPage = () => {
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure expedita minima accusantium nisi ipsa, est repudiandae nihil quae sequi, autem reiciendis
       </p>
       {dataLoaded && (
-        <div className='flex flex-col items-center py-10'>
+        <div className='flex flex-col font-sans items-center py-10'>
           <ResponsiveContainer width="100%" height={400}>
             <ScatterChart
               width={600}
@@ -104,14 +102,14 @@ const Home: NextPage = () => {
                 name="x" unit=""
                 domain={getDomain(plotdata, 'dfh')}
                 tickFormatter={(value: number) => value.toFixed(2)}
-                label={{ value: 'stability', position: 'insideTopRight', offset: -15 }}
+                label={{ value: 'Stability (eV/atom)', position: 'insideTopRight', offset: -15 }}
               />
               <YAxis type="number"
                 dataKey="bandgap"
-                name="y" unit=" eV"
+                name="y" unit=""
                 domain={getDomain(plotdata, 'bandgap')}
                 tickFormatter={(value: number) => value.toFixed(1)}
-                label={{ value: 'bandgap', position: 'insideTopLeft', offset: 60, angle: -90 }}
+                label={{ value: 'Bandgap (eV)', position: 'insideLeft', offset: 70, angle: -90 }}
               />
               <Legend verticalAlign='bottom' />
               <ZAxis type="number" dataKey="rad" range={[0, 400]} scale="pow" />

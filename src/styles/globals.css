@@ -16,3 +16,8 @@ input[type=number] {
 sub, sup { font-size: 80%; line-height: 0; vertical-align: baseline; position: static; }
 sup { top: -0.2em; vertical-align: super;}
 sub { bottom: -0.1em; vertical-align: sub;}
+
+/* .recharts-cartesian-axis-tick {    
+  font-size: 1.2rem;
+  font-family: Roboto, sans-serif;
+} */
