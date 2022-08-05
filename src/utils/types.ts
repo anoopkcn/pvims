@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-
 const metaValidator = z.object({
   B_abundance_rank: z.number().nullable().optional(),
   Eg_direct: z.number().nullable().optional(),
@@ -30,14 +29,13 @@ const metaValidator = z.object({
   natoms: z.number().nullable().optional(),
   space_group: z.string().nullable().optional(),
   id: z.string(),
-})
+});
 
-export type MetaAPIResponse = z.infer<typeof metaValidator>
-
+export type MetaAPIResponse = z.infer<typeof metaValidator>;
 
 export type PlotDataType = MetaAPIResponse & {
   primary: number | null;
   secondary: number | null;
   radius?: number | null;
   rad?: number | null;
-}
+};

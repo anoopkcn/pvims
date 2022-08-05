@@ -18,7 +18,6 @@ import { MetaAPIResponse } from '@/utils/types';
 import { LoadingPuff } from '@/components/LoadingPuff';
 import { DataLoaded } from '@/utils/helpers';
 
-
 function Filter({
   column,
   table,

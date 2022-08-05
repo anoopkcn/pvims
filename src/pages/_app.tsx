@@ -3,10 +3,9 @@ import type { AppProps } from 'next/app'
 
 import { withTRPC } from '@trpc/next';
 import { AppType } from 'next/dist/shared/lib/utils';
-import { AppRouter } from '@/backend/router';
+import { AppRouter } from "@/server/router";
 import Head from "next/head";
 import { Layout } from '@/components/Layout';
-
 
 // function getBaseUrl() {
 //   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
