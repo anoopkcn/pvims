@@ -2,7 +2,7 @@ import { MetaAPIResponse } from "@/utils/types";
 import * as trpc from "@trpc/server";
 import { z } from 'zod';
 
-const metadata_url = `https://api.github.com/repos/anoopkcn/pvimsdb/contents`
+const metadata_url = `https://api.github.com/repos/anoopkcn/pvimsdb/contents/metadata`;
 
 export const appRouter = trpc
   .router()

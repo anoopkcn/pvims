@@ -5,34 +5,42 @@ import { fixPrecision, MakeMatName } from '@/utils/helpers';
 const columnHelper = createColumnHelper<MetaAPIResponse>()
 
 export const columns = [
-  columnHelper.accessor('id', {
-    cell: info => info.getValue(),
-    header: 'ID',
+  columnHelper.accessor("id", {
+    cell: (info) => info.getValue(),
+    header: "ID",
   }),
-  columnHelper.accessor('material', {
-    cell: info => MakeMatName(info.getValue()),
-    header: 'Material',
+  columnHelper.accessor("material", {
+    cell: (info) => MakeMatName(info.getValue()),
+    header: "Material",
   }),
-  columnHelper.accessor('natoms', {
-    cell: info => info.getValue(),
-    header: 'Atoms',
+  columnHelper.accessor("natoms", {
+    cell: (info) => info.getValue(),
+    header: "Atoms",
   }),
-  columnHelper.accessor('space_group', {
-    cell: info => info.getValue(),
-    header: 'Space Group',
+  columnHelper.accessor("space_group", {
+    cell: (info) => info.getValue(),
+    header: "Space Group",
   }),
-  columnHelper.accessor('bandgap', {
+  columnHelper.accessor("bandgap", {
     // if value is not null or undefined, then  get the value
-    cell: info => fixPrecision(info.getValue()),
-    header: 'bandgap',
+    cell: (info) => fixPrecision(info.getValue()),
+    header: "bandgap",
   }),
-  // columnHelper.accessor('Eg_fund', {
-  //   cell: info => fixPrecision(info.getValue()),
-  //   header: () => <span>Bandgap_fund<sup>1</sup></span>,
+  // columnHelper.accessor("Eg_fund", {
+  //   cell: (info) => fixPrecision(info.getValue()),
+  //   header: () => (
+  //     <span>
+  //       Bandgap_fund<sup>1</sup>
+  //     </span>
+  //   ),
   // }),
-  columnHelper.accessor('dfh', {
-    cell: info => fixPrecision(info.getValue()),
-    header: 'stability',
+  columnHelper.accessor("dprime", {
+    cell: (info) => fixPrecision(info.getValue()),
+    header: "Dprime",
+  }),
+  columnHelper.accessor("dfh", {
+    cell: (info) => fixPrecision(info.getValue()),
+    header: "stability",
   }),
 
   // columnHelper.accessor('Eg_direct', {
@@ -55,4 +63,4 @@ export const columns = [
   //     cell: info => fixPrecision(info.getValue()),
   //     header: 'dir_SOC',
   // }),
-]
+];

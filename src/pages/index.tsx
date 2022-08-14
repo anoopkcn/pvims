@@ -50,20 +50,14 @@ const Home: NextPage = () => {
     })),
   ];
 
-  // matches property if deformation_potential is grater than zero
+  // matches property if dprime is grater than zero
   const pdprime = _.filter(plotdata, (item) => {
-    if (
-      item.deformation_potential !== null &&
-      Number(item.deformation_potential) > 0
-    ) {
+    if (item.dprime !== null && Number(item.dprime) > 0) {
       return item;
     }
   });
   const ndprime = _.filter(plotdata, (item) => {
-    if (
-      item.deformation_potential !== null &&
-      Number(item.deformation_potential) <= 0
-    ) {
+    if (item.dprime !== null && Number(item.dprime) <= 0) {
       return item;
     }
   });
@@ -100,7 +94,7 @@ const Home: NextPage = () => {
           <p>
             Stability = {(Number(activeData.dfh) * 1000).toFixed(2)} meV/atom
           </p>
-          <p>dPrime = {Number(activeData.deformation_potential).toFixed(2)}</p>
+          <p>dPrime = {Number(activeData.dprime).toFixed(2)}</p>
           <p>Volume = {Number(activeData.equilibrium_volume).toFixed(2)}</p>
         </div>
       );
@@ -181,13 +175,17 @@ const Home: NextPage = () => {
         </div>
       )}
       {!dataLoaded && <LoadingPuff />}
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic molestias
-      labore vitae? Accusantium cupiditate autem quisquam maiores inventore,
-      commodi vel iure blanditiis placeat nostrum expedita esse quo amet ea
-      rerum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum vel
-      facilis repudiandae qui recusandae corrupti similique obcaecati doloribus
-      fugiat ut autem iure porro doloremque, quibusdam facere quam est quia
-      officia.
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic molestias
+        labore vitae? Accusantium cupiditate autem quisquam maiores inventore,
+        commodi vel iure blanditiis placeat nostrum expedita esse quo amet ea
+      </p>
+      <p>
+        rerum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum vel
+        facilis repudiandae qui recusandae corrupti similique obcaecati
+        doloribus fugiat ut autem iure porro doloremque, quibusdam facere quam
+        est quia officia.
+      </p>
     </div>
   );
 };
